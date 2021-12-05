@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require("path");
 
 module.exports = {
   plugins: [
@@ -6,14 +6,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: path.resolve(__dirname, "static", "posts")
-      }
+        path: path.resolve(__dirname, "static", "posts"),
+      },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        extensions: ['.mdx', '.md'],
-      }
-    }
-  ]
-}
+        extensions: [".mdx", ".md"],
+      },
+    },
+  ],
+};
