@@ -1,8 +1,8 @@
 import React from "react";
 import BaseLayout from "layouts/Base";
 
-function About() {
+function StartHere() {
   return <BaseLayout body={"Start here page!"} />;
 }
 
-export default About;
+export default StartHere;
