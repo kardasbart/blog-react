@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 import MainLayout from "layouts/MainLayout";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
       const path = `/post/${slug}`;
       return (
         <li key={path}>
-          <a href={path}>{title}</a>
+          <Link to={path}>{title}</Link>
           <p> {date}</p>
         </li>
       );
