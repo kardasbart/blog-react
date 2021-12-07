@@ -35,7 +35,7 @@ function App() {
         </li>
       );
     });
-  return <MainLayout body={b} />;
+  return <MainLayout>{b}</MainLayout>;
 }
 
 export default App;
