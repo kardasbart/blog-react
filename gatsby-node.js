@@ -16,7 +16,7 @@ exports.createPages = async ({ graphql, actions }) => {
               date(formatString: "MMMM DD, YYYY")
               title
               slug
-              custom_list
+              abstract
             }
             body
           }

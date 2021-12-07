@@ -7,6 +7,9 @@ export default function PostTemplate(props) {
   const { frontmatter, body } = props.pageContext;
   return (
     <MainLayout>
+      <h1>{frontmatter.title}</h1>
+      <small>{frontmatter.date}</small>
+      <p>{frontmatter.abstract}</p>
       <MDXRenderer>{body}</MDXRenderer>
     </MainLayout>
   );

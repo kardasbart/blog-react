@@ -1,29 +1,40 @@
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import MainLayout from "layouts/MainLayout";
+import { Container } from "react-bootstrap";
+import PostCard from "components/PostCard";
+<script src=""></script>;
 
 export default function App() {
   // This query will get all of your posts
-  const b = posts.allMdx.edges
+  const postsValues = useStaticQuery(metaPostsQuery);
+  const postObjects = postsValues.allMdx.edges
     .sort((a, b) => {
       const a_ = a.node.frontmatter.slug;
       const b_ = b.node.frontmatter.slug;
       return ("" + a_).localeCompare(b_);
     })
     .map((edge) => {
-      const { date, slug, title } = edge.node.frontmatter;
+      const { title, date, slug, abstract } = edge.node.frontmatter;
       const path = `/post/${slug}`;
       return (
-        <li key={path}>
-          <Link to={path}>{title}</Link>
-          <p> {date}</p>
-        </li>
+        <PostCard
+          key={slug}
+          link={path}
+          title={title}
+          date={date}
+          abstract={abstract}
+        ></PostCard>
       );
     });
-  return <MainLayout>{b}</MainLayout>;
+  return (
+    <MainLayout>
+      <Container fluid>{postObjects}</Container>
+    </MainLayout>
+  );
 }
 
-const posts = useStaticQuery(graphql`
+const metaPostsQuery = graphql`
   query {
     allMdx(filter: { fileAbsolutePath: { regex: "/posts/" } }) {
       edges {
@@ -32,9 +43,10 @@ const posts = useStaticQuery(graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             slug
+            abstract
           }
         }
       }
     }
   }
-`);
+`;
