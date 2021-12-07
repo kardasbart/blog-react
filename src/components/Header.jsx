@@ -1,7 +1,7 @@
 import React from "react";
 import BlogNavbar from "components/Navbar";
 
-function Header() {
+export default function Header() {
   return (
     <div>
       <p>Header</p>
@@ -9,5 +9,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header;

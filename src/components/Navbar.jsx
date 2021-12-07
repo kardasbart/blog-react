@@ -2,9 +2,9 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "gatsby";
 
-function BlogNavbar() {
+export default function BlogNavbar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="sm">
       <Container>
         <Navbar.Brand href="/">Bart Tech Blog</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,5 +25,3 @@ function BlogNavbar() {
     </Navbar>
   );
 }
-
-export default BlogNavbar;

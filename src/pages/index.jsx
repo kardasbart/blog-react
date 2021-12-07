@@ -2,23 +2,8 @@ import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import MainLayout from "layouts/MainLayout";
 
-function App() {
+export default function App() {
   // This query will get all of your posts
-  const posts = useStaticQuery(graphql`
-    query {
-      allMdx(filter: { fileAbsolutePath: { regex: "/posts/" } }) {
-        edges {
-          node {
-            frontmatter {
-              date(formatString: "MMMM DD, YYYY")
-              title
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
   const b = posts.allMdx.edges
     .sort((a, b) => {
       const a_ = a.node.frontmatter.slug;
@@ -38,4 +23,18 @@ function App() {
   return <MainLayout>{b}</MainLayout>;
 }
 
-export default App;
+const posts = useStaticQuery(graphql`
+  query {
+    allMdx(filter: { fileAbsolutePath: { regex: "/posts/" } }) {
+      edges {
+        node {
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            slug
+          }
+        }
+      }
+    }
+  }
+`);
