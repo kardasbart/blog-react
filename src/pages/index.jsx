@@ -1,6 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import BaseLayout from "layouts/Base";
+import MainLayout from "layouts/MainLayout";
 
 function App() {
   // This query will get all of your posts
@@ -35,7 +35,7 @@ function App() {
         </li>
       );
     });
-  return <BaseLayout body={b} />;
+  return <MainLayout body={b} />;
 }
 
 export default App;

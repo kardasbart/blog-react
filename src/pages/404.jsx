@@ -1,8 +1,8 @@
 import React from "react";
-import BaseLayout from "layouts/Base";
+import MainLayout from "layouts/MainLayout";
 
 function PageNotFound() {
-  return <BaseLayout body={"Page not found!"} />;
+  return <MainLayout body={"Page not found!"} />;
 }
 
 export default PageNotFound;
