@@ -1,27 +1,47 @@
-import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "gatsby";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
-export default function BlogNavbar() {
+import Link from "components/Link";
+
+//TODO GQL query
+const pages = [
+  { name: "Start here", link: "/start" },
+  { name: "Blog", link: "/" },
+  { name: "About", link: "/about" },
+];
+
+const Navbar = () => {
   return (
-    <Navbar bg="light" expand="sm">
-      <Container>
-        <Navbar.Brand href="/">Bart Tech Blog</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/start">
-              Start here
-            </Nav.Link>
-            <Nav.Link as={Link} to="/">
-              Blog
-            </Nav.Link>
-            <Nav.Link as={Link} to="/about">
-              About
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h5"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+          >
+            Bartech blog
+          </Typography>
+          {pages.map((page) => (
+            <Typography
+              variant="h6"
+              noWrap
+              component={Link}
+              to={page.link}
+              key={page.link}
+              style={{ textDecoration: "none" }}
+              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            >
+              {page.name}
+            </Typography>
+          ))}
+        </Toolbar>
       </Container>
-    </Navbar>
+    </AppBar>
   );
-}
+};
+export default Navbar;

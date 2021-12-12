@@ -1,9 +1,9 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
+
 import MainLayout from "layouts/MainLayout";
-import { Container } from "react-bootstrap";
 import PostCard from "components/PostCard";
-<script src=""></script>;
+import PostCardMui from "components/PostCardMui";
 
 export default function App() {
   // This query will get all of your posts
@@ -15,23 +15,12 @@ export default function App() {
       return ("" + a_).localeCompare(b_);
     })
     .map((edge) => {
-      const { title, date, slug, abstract } = edge.node.frontmatter;
-      const path = `/post/${slug}`;
-      return (
-        <PostCard
-          key={slug}
-          link={path}
-          title={title}
-          date={date}
-          abstract={abstract}
-        ></PostCard>
-      );
+      const data = edge.node.frontmatter;
+      const path = `/post/${data.slug}`;
+      data.link = path;
+      return <PostCardMui key={data.slug} data={data}></PostCardMui>;
     });
-  return (
-    <MainLayout>
-      <Container fluid>{postObjects}</Container>
-    </MainLayout>
-  );
+  return <MainLayout>{postObjects}</MainLayout>;
 }
 
 const metaPostsQuery = graphql`
@@ -44,6 +33,16 @@ const metaPostsQuery = graphql`
             title
             slug
             abstract
+            primary_thumb {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+            secondary_thumb {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
           }
         }
       }
