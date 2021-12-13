@@ -11,6 +11,7 @@
     "@fontsource/exo-2": "^4.5.1",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "@mui/icons-material": "^5.2.1",
     "@mui/material": "^5.2.3",
     "gatsby": "^4.3.0",
     "gatsby-plugin-image": "^2.3.0",

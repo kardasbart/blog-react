@@ -2,51 +2,35 @@ import React from "react";
 import { useState, useMemo, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Button from "@mui/material/Button";
 
 import { getDesignTokens } from "components/theme.js";
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+export const ThemeContext = React.createContext(null);
 
 export default function CustomThemeProvider({ children }) {
   let localMode = localStorage.getItem("themeMode");
   if (localMode === null) localMode = "light";
   const [mode, setMode] = useState(localMode);
 
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
-    }),
-    []
-  );
+  const toggleTheme = () => {
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
 
   useEffect(() => {
+    console.log("Settings saved!");
     localStorage.setItem("themeMode", mode);
   }, [mode]);
 
+  const context = {
+    toggleTheme: toggleTheme,
+    currentTheme: mode,
+  };
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
   return (
-    <ColorModeContext.Provider value={colorMode}>
+    <ThemeContext.Provider value={context}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Button
-          onClick={colorMode.toggleColorMode}
-          sx={{
-            display: "flex",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            bgcolor: "background.default",
-            color: "text.primary",
-            borderRadius: 1,
-            p: 3,
-          }}
-        >
-          {theme.palette.mode} mode
-        </Button>
         {children}
       </ThemeProvider>
-    </ColorModeContext.Provider>
+    </ThemeContext.Provider>
   );
 }
