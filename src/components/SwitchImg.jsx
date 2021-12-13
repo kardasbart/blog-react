@@ -1,6 +1,5 @@
 import React from "react";
-import { useRef } from "react";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import Container from "@mui/material/Container";
 
 export default function SwitchImg(props) {
@@ -8,11 +7,12 @@ export default function SwitchImg(props) {
     <Container
       disableGutters
       sx={{
-        // flexGrow: 1,
-        // display: "flex",
+        flexGrow: 1,
+        display: "flex",
         overflow: "hidden",
         position: "relative",
-        height: "300px",
+        minHeight: "300px",
+        minWidth: "300px",
       }}
     >
       <Container

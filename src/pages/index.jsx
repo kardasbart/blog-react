@@ -3,7 +3,6 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import MainLayout from "layouts/MainLayout";
 import PostCard from "components/PostCard";
-import PostCardMui from "components/PostCardMui";
 
 export default function App() {
   // This query will get all of your posts
@@ -14,11 +13,13 @@ export default function App() {
       const b_ = b.node.frontmatter.slug;
       return ("" + a_).localeCompare(b_);
     })
-    .map((edge) => {
+    .map((edge, index) => {
       const data = edge.node.frontmatter;
       const path = `/post/${data.slug}`;
       data.link = path;
-      return <PostCardMui key={data.slug} data={data}></PostCardMui>;
+      return (
+        <PostCard key={data.slug} data={data} flipped={index % 2}></PostCard>
+      );
     });
   return <MainLayout>{postObjects}</MainLayout>;
 }

@@ -1,73 +1,55 @@
 import React from "react";
-import { useState } from "react";
-import { Link } from "gatsby";
-import Container from "@mui/material/Container";
-import SwitchImg from "./SwitchImg";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 import { getImage } from "gatsby-plugin-image";
 
-export default function PostCard(props) {
-  const computeDirection = (isImageFirst) => {
-    if (isImageFirst) return "column";
-    else if (/*props.flipped*/ true) return "row-reverse";
-    else return "row";
-  };
-  const [direction, setDirection] = useState(computeDirection(false));
-  const computeHalfPostSyle = (isImageFirst) => {
-    let result = {
-      overflow: "hidden",
-      maxHeight: "30vh",
-      minHeight: "300px",
-      maxWidth: "auto",
-    };
-    if (!isImageFirst) {
-      result.maxWidth = "50%";
-    }
-    return result;
-  };
-  const [halfPostCardStyle, setHalfPostCardStyle] = useState(
-    computeHalfPostSyle(false)
-  );
+import SwitchImg from "./SwitchImg";
+import Link from "./Link";
 
+export default function PostCard({ data, flipped }) {
+  const order = flipped === 1 ? "row" : "row-reverse";
+  console.log(order);
   return (
-    // <Card
-    //   as={Link}
-    //   className="p-0 m-5"
-    //   to={props.link}
-    //   style={{ textDecoration: "none", color: "inherit" }}
-    // >
-
-    //   <Card.Body style={{ width: "50%" }}>
-    //     <Card.Title>{props.title}</Card.Title>
-    //     <Card.Text>{props.abstract}</Card.Text>
-    //     <Card.Text>{props.date}</Card.Text>
-    //   </Card.Body>
-    // </Card>
-    <Link
-      // className={flexClass}
-      to={props.link}
-      className="shadow"
-      style={{
-        textDecoration: "none",
-        color: "inherit",
+    <Card
+      component={Link}
+      to={data.link}
+      sx={{
+        display: "flex",
+        flexDirection: {
+          xs: "column",
+          sm: order,
+        },
       }}
     >
-      <Container style={{ flexDirection: direction }}>
+      <CardMedia
+        sx={{
+          width: { xs: "auto", sm: "50%" },
+          height: { xs: "50%", sm: "auto" },
+        }}
+      >
         <SwitchImg
-          primary={getImage(props.primary)}
-          secondary={getImage(props.secondary)}
-          style={halfPostCardStyle}
+          primary={getImage(data.primary_thumb)}
+          secondary={getImage(data.secondary_thumb)}
         />
-        <div
-          className="p-4 flex flex-column"
-          style={{ ...halfPostCardStyle, backgroundColor: "white" }}
-        >
-          <h3>{props.title}</h3>
-          <p className="align-self-stretch" style={{ overflow: "hidden" }}>
-            {props.abstract}
-          </p>
-          <h6>{props.date}</h6>
-        </div>
-      </Container>
-    </Link>
+      </CardMedia>
+      <CardContent
+        sx={{
+          width: { xs: "auto", sm: "50%" },
+          height: { xs: "50%", sm: "auto" },
+        }}
+      >
+        <Typography gutterBottom variant="h5" component="div">
+          {data.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {data.abstract}
+        </Typography>
+        <Typography variant="body" color="text.secondary">
+          {data.date}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
