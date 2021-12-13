@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import MainLayout from "layouts/MainLayout";
 import PostCard from "components/PostCard";
+import { Stack } from "@mui/material";
 
 export default function App() {
   // This query will get all of your posts
@@ -21,7 +22,13 @@ export default function App() {
         <PostCard key={data.slug} data={data} flipped={index % 2}></PostCard>
       );
     });
-  return <MainLayout>{postObjects}</MainLayout>;
+  return (
+    <MainLayout>
+      <Stack mt={5} spacing={5}>
+        {postObjects}
+      </Stack>
+    </MainLayout>
+  );
 }
 
 const metaPostsQuery = graphql`
