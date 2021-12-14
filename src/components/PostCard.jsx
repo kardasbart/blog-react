@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useRef, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,7 +11,31 @@ import Link from "./Link";
 
 export default function PostCard({ data, flipped }) {
   const order = flipped === 1 ? "row" : "row-reverse";
-  console.log(order);
+  const [showFirstThumb, setShowFirstThumb] = useState(true);
+
+  const switchImgComponent = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!switchImgComponent.current) return;
+      const box = switchImgComponent.current.getBoundingClientRect();
+      if (!box) return;
+      const by = box.y;
+      const bh = box.height;
+      const val = by && bh ? by + bh / 2 : 0;
+      console.log("Val", val, window.innerHeight / 2);
+      if (val && val < window.innerHeight / 2) setShowFirstThumb(false);
+      else setShowFirstThumb(true);
+      console.log("BB", by, bh);
+      console.log("bool", showFirstThumb);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [showFirstThumb, setShowFirstThumb]);
+
   return (
     <Card
       component={Link}
@@ -29,10 +54,13 @@ export default function PostCard({ data, flipped }) {
           height: { xs: "50%", sm: "auto" },
         }}
       >
-        <SwitchImg
-          primary={getImage(data.primary_thumb)}
-          secondary={getImage(data.secondary_thumb)}
-        />
+        <div ref={switchImgComponent}>
+          <SwitchImg
+            isPrimaryShown={showFirstThumb}
+            primary={getImage(data.primary_thumb)}
+            secondary={getImage(data.secondary_thumb)}
+          />
+        </div>
       </CardMedia>
       <CardContent
         sx={{

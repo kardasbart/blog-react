@@ -40,7 +40,6 @@ const Navbar = () => {
     <AppBar position="static">
       <Stack
         height={64}
-        disableGutters
         direction="row"
         justifyContent="space-between"
         alignItems="center"

@@ -3,6 +3,8 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import Container from "@mui/material/Container";
 
 export default function SwitchImg(props) {
+  console.log(props.primary);
+  console.log(props.secondary);
   return (
     <Container
       disableGutters
@@ -28,13 +30,15 @@ export default function SwitchImg(props) {
         }}
       >
         <GatsbyImage
-          image={props.primary}
+          image={props.isPrimaryShown ? props.primary : props.secondary}
           alt="Secondary image"
-          style={{
-            position: "absolute",
-          }}
+          // style={{
+          //   position: "absolute",
+          // }}
         />
-        <GatsbyImage image={props.secondary} alt="Primary image" />
+        {/* {props.isPrimaryShown && (
+          <GatsbyImage image={props.secondary} alt="Primary image" />
+        )} */}
       </Container>
     </Container>
   );
