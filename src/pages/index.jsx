@@ -43,12 +43,20 @@ const metaPostsQuery = graphql`
             abstract
             primary_thumb {
               childImageSharp {
-                gatsbyImageData
+                gatsbyImageData(
+                  width: 800
+                  height: 500
+                  transformOptions: { cropFocus: CENTER, fit: COVER }
+                )
               }
             }
             secondary_thumb {
               childImageSharp {
-                gatsbyImageData
+                gatsbyImageData(
+                  width: 800
+                  height: 500
+                  transformOptions: { cropFocus: CENTER, fit: COVER }
+                )
               }
             }
           }

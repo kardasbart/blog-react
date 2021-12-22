@@ -1,45 +1,38 @@
 import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
-import Container from "@mui/material/Container";
+import Carousel from "react-material-ui-carousel";
 
 export default function SwitchImg(props) {
   console.log(props.primary);
   console.log(props.secondary);
   return (
-    <Container
-      disableGutters
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        overflow: "hidden",
-        position: "relative",
-        minHeight: "300px",
-        minWidth: "300px",
+    <Carousel
+      duration={200}
+      interval={5000}
+      indicatorContainerProps={{
+        style: {
+          bottom: "1rem",
+          marginTop: "0px",
+          position: "absolute",
+          textAlign: "center", // 4
+          zIndex: 99,
+        },
       }}
     >
-      <Container
-        disableGutters
-        sx={{
-          display: "flex",
-          flexGrow: 1,
-          overflow: "hidden",
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
+      <GatsbyImage
+        image={props.primary}
+        alt="Primary image"
+        style={{
+          height: "30vh",
         }}
-      >
-        <GatsbyImage
-          image={props.isPrimaryShown ? props.primary : props.secondary}
-          alt="Secondary image"
-          // style={{
-          //   position: "absolute",
-          // }}
-        />
-        {/* {props.isPrimaryShown && (
-          <GatsbyImage image={props.secondary} alt="Primary image" />
-        )} */}
-      </Container>
-    </Container>
+      />
+      <GatsbyImage
+        image={props.secondary}
+        alt="Primary image"
+        style={{
+          height: "30vh",
+        }}
+      />
+    </Carousel>
   );
 }
