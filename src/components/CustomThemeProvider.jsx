@@ -7,8 +7,11 @@ import { getDesignTokens } from "components/theme.js";
 export const ThemeContext = React.createContext(null);
 
 export default function CustomThemeProvider({ children }) {
-  let localMode = localStorage.getItem("themeMode");
-  if (localMode === null) localMode = "light";
+  let localMode = null;
+  if (typeof window !== "undefined") {
+    localMode = localStorage.getItem("themeMode");
+  }
+  if (!localMode) localMode = "light";
   const [mode, setMode] = useState(localMode);
 
   const toggleTheme = () => {
@@ -16,7 +19,6 @@ export default function CustomThemeProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log("Settings saved!");
     localStorage.setItem("themeMode", mode);
   }, [mode]);
 

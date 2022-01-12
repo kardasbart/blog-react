@@ -112,10 +112,16 @@ const Navbar = () => {
           disableRipple
           size="large"
           aria-label="dark mode"
-          onClick={themeContext.toggleTheme}
+          onClick={themeContext ? themeContext.toggleTheme : () => {}}
           color="inherit"
         >
-          {themeContext.currentTheme === "dark" ? <LightMode /> : <DarkMode />}
+          {!themeContext ? (
+            <MenuIcon />
+          ) : themeContext && themeContext.currentTheme === "light" ? (
+            <DarkMode />
+          ) : (
+            <LightMode />
+          )}
         </IconButton>
       </Stack>
     </AppBar>

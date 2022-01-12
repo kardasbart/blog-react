@@ -28,7 +28,7 @@
   },
   "scripts": {
     "dev": "gatsby develop -H 0.0.0.0 -p 9000",
-    "build": "gatsby build"
+    "build": "gatsby build && cp -r public/* ../kardasbart.github.io && echo Built and installed!"
   },
   "devDependencies": {
     "gatsby-plugin-root-import": "^2.0.8"

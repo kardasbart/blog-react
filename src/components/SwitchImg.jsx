@@ -9,6 +9,7 @@ export default function SwitchImg(props) {
     <Carousel
       duration={200}
       interval={5000}
+      swipe={false}
       indicatorContainerProps={{
         style: {
           bottom: "1rem",
@@ -23,14 +24,14 @@ export default function SwitchImg(props) {
         image={props.primary}
         alt="Primary image"
         style={{
-          height: "30vh",
+          height: "300px",
         }}
       />
       <GatsbyImage
         image={props.secondary}
         alt="Primary image"
         style={{
-          height: "30vh",
+          height: "300px",
         }}
       />
     </Carousel>
