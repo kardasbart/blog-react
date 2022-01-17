@@ -2,6 +2,9 @@ const path = require("path");
 
 module.exports = {
   plugins: [
+	'gatsby-plugin-top-layout',
+	'gatsby-plugin-react-helmet',
+    'gatsby-plugin-mui-emotion',
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

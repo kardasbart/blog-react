@@ -8,7 +8,7 @@ import { IconButton, Menu, MenuItem } from "@mui/material";
 import { Menu as MenuIcon, LightMode, DarkMode } from "@mui/icons-material";
 
 import Link from "components/Link";
-import { ThemeContext } from "./CustomThemeProvider";
+import DarkModeButton from "components/DarkModeButton";
 
 //TODO GQL query
 const pages = [
@@ -33,8 +33,6 @@ const Navbar = () => {
     setAnchorElNav(null);
     navigate(link);
   };
-
-  const themeContext = useContext(ThemeContext);
 
   return (
     <AppBar position="static">
@@ -108,21 +106,7 @@ const Navbar = () => {
             </MenuItem>
           ))}
         </Menu>
-        <IconButton
-          disableRipple
-          size="large"
-          aria-label="dark mode"
-          onClick={themeContext ? themeContext.toggleTheme : () => {}}
-          color="inherit"
-        >
-          {!themeContext ? (
-            <MenuIcon />
-          ) : themeContext && themeContext.currentTheme === "light" ? (
-            <DarkMode />
-          ) : (
-            <LightMode />
-          )}
-        </IconButton>
+        <DarkModeButton />
       </Stack>
     </AppBar>
   );
